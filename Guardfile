@@ -12,3 +12,9 @@ guard :minitest, test_folders: 'tests', test_file_patterns: '*.rb' do
   watch(%r{^lib/(.+)\.rb$}) { |m| "tests/lib/#{m[1]}.rb" }
   watch(%r|^tests/pavlov\.rb|)    { "tests" }
 end
+
+guard :rspec, { cli: ["--color"] } do
+  watch(%r{^spec/.+_spec\.rb$})
+  watch(%r{^lib/(.+)\.rb$})     { |m| "spec/#{m[1]}_spec.rb" }
+  watch('spec/spec_helper.rb')  { "spec" }
+end
